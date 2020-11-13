@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "525066618581",
+    "firebase_url": "https://file-drive-a4f2f.firebaseio.com",
+    "project_id": "file-drive-a4f2f",
+    "storage_bucket": "file-drive-a4f2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525066618581:android:11008715d8101f93f1445c",
+        "android_client_info": {
+          "package_name": "com.chennupatibalu.filedrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525066618581-lprkrrifna871pgsuvvl61k6nv8k171m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv-cx2rcQKAsILED6iJBn-IZ_UsVxTYmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525066618581-lprkrrifna871pgsuvvl61k6nv8k171m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
