@@ -8,15 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText emailET,passwordET,nameET,phoneET;
     private Button signUpButton;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        Firebase.setAndroidContext(this);
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
         nameET = findViewById(R.id.personName);
@@ -32,11 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         signUpButton.setOnClickListener(view -> startSignUp());
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(authStateListener);
-    }
+
     public void startSignUp()
     {
         String name = nameET.getText().toString();
@@ -44,17 +40,14 @@ public class SignUpActivity extends AppCompatActivity {
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-            if(!task.isSuccessful())
-            {
-                Toast.makeText(getApplicationContext(),"Sign Up failed",Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(),"Sign Up Success",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
-                Toast.makeText(getApplicationContext(),"Login with your credentials",Toast.LENGTH_LONG).show();
-            }
-        });
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Sign Up failed", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Sign Up Success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    Toast.makeText(getApplicationContext(), "Login with your credentials", Toast.LENGTH_LONG).show();
+                }
+            });
     }
 }

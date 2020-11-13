@@ -11,9 +11,17 @@
         android:theme="@style/Theme.FileDrive"
         android:name=".FileDrive"
         >
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SignUpActivity"
+            android:label="SignUp"
+            />
+        <activity
+            android:name=".LoginActivity"
+            android:label="SignIn"
+            />
+        <activity
+            android:name=".SplashActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,11 +31,14 @@ public class LoginActivity extends AppCompatActivity {
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
         signinButton = findViewById(R.id.signinButton);
-        signupButton = findViewById(R.id.signupButton);
-
-        signupButton.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this,SignUpActivity.class)));
+        signupButton = findViewById(R.id.signUpButton);
 
         signinButton.setOnClickListener(view -> startSignIn());
+        signupButton.setOnClickListener(view ->{
+            Intent i = new Intent(LoginActivity.this,SignUpActivity.class);
+            startActivity(i);
+        });
+
         authStateListener = firebaseAuth -> {
             if(firebaseAuth.getCurrentUser()!=null)
                 startActivity(new Intent(LoginActivity.this,DriveActivity.class));
