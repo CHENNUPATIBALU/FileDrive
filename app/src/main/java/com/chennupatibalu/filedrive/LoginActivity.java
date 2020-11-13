@@ -37,12 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         signinButton.setOnClickListener(view -> startSignIn());
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser()!=null)
-                    startActivity(new Intent(LoginActivity.this,DriveActivity.class));
-            }
+        authStateListener = firebaseAuth -> {
+            if(firebaseAuth.getCurrentUser()!=null)
+                startActivity(new Intent(LoginActivity.this,DriveActivity.class));
         };
     }
 
@@ -67,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(getApplicationContext(),"Sign in Success",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this,DriveActivity.class));
                 }
             });
         }
