@@ -15,12 +15,12 @@ import android.view.View;
 
 import com.chennupatibalu.filedrive.ui.main.SectionsPagerAdapter;
 
-public class FileActivity extends AppCompatActivity {
+public class DriveActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file);
+        setContentView(R.layout.activity_drive);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -31,7 +31,7 @@ public class FileActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Made by CHENNUPATI BALU", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
