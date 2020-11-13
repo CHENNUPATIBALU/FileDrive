@@ -32,9 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         signinButton = findViewById(R.id.signinButton);
         signupButton = findViewById(R.id.signupButton);
 
-        signupButton.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
-        });
+        signupButton.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this,SignUpActivity.class)));
 
         signinButton.setOnClickListener(view -> startSignIn());
         authStateListener = firebaseAuth -> {
@@ -54,7 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
 
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Fields are Empty", Toast.LENGTH_LONG).show();
+        }
+        else
         {
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
                 if(!task.isSuccessful())
@@ -64,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(getApplicationContext(),"Sign in Success",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LoginActivity.this,DriveActivity.class));
                 }
             });
         }
