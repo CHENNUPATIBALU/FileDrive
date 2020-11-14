@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -16,6 +18,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailET,passwordET,nameET,phoneET;
     private Button signUpButton;
     private FirebaseAuth mAuth;
+    private ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +26,17 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
-        Firebase.setAndroidContext(this);
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
         nameET = findViewById(R.id.personName);
         phoneET = findViewById(R.id.phoneNumber);
         signUpButton = findViewById(R.id.signupButton);
+        pb = findViewById(R.id.signUpProgressBar);
 
-        signUpButton.setOnClickListener(view -> startSignUp());
+        signUpButton.setOnClickListener(view -> {
+            pb.setVisibility(View.VISIBLE);
+            startSignUp();
+        });
     }
 
     public void startSignUp()
@@ -46,6 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Sign Up Success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    pb.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Login with your credentials", Toast.LENGTH_LONG).show();
                 }
             });

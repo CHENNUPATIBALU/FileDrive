@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailET,passwordET;
     private Button signinButton,signupButton;
+    private ProgressBar pb;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -32,8 +34,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.passwordET);
         signinButton = findViewById(R.id.signinButton);
         signupButton = findViewById(R.id.signUpButton);
+        pb = findViewById(R.id.signInProgressBar);
 
-        signinButton.setOnClickListener(view -> startSignIn());
+        signinButton.setOnClickListener(view -> {
+            pb.setVisibility(View.VISIBLE);
+            startSignIn();
+        });
         signupButton.setOnClickListener(view ->{
             Intent i = new Intent(LoginActivity.this,SignUpActivity.class);
             startActivity(i);
@@ -68,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    pb.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(),"Sign in Success",Toast.LENGTH_LONG).show();
                 }
             });
