@@ -25,18 +25,21 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" >
+            android:background="?attr/colorPrimary">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/driveTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drive" />
+                android:text="@string/drive"
+                />
+
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/storageTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Storage" />
+                android:text="@string/storage"
+                />
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -45,7 +48,41 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+        <fragment
+            android:id="@+id/driveFragment"
+            android:name="com.chennupatibalu.filedrive.DriveFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_drive" />
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drive" />
+
+        <fragment
+            android:id="@+id/storageFragment"
+            android:name="com.chennupatibalu.filedrive.StorageFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_storage" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/storage" />
+
+
+    </androidx.viewpager.widget.ViewPager>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -53,5 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        android:contentDescription="TODO" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

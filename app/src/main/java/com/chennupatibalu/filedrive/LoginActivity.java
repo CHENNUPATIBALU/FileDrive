@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         signinButton = findViewById(R.id.signinButton);
         signupButton = findViewById(R.id.signUpButton);
         pb = findViewById(R.id.signInProgressBar);
+        pb.setVisibility(View.INVISIBLE);
 
         signinButton.setOnClickListener(view -> {
             pb.setVisibility(View.VISIBLE);
