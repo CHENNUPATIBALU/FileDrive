@@ -13,57 +13,74 @@
         tools:layout_editor_absoluteX="202dp"
         tools:layout_editor_absoluteY="234dp">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailET"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginStart="47dp"
-            android:layout_marginLeft="47dp"
+            android:layout_marginLeft="46dp"
             android:layout_marginTop="238dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginRight="52dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="49dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/prompt_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordET"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginStart="49dp"
-            android:layout_marginLeft="49dp"
-            android:layout_marginTop="310dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="300dp"
             android:layout_marginEnd="47dp"
             android:layout_marginRight="47dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/prompt_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/signupButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="161dp"
-            android:layout_marginRight="161dp"
-            android:layout_marginBottom="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="396dp"
             android:text="@string/sign_up" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,11 +97,19 @@
             android:ems="10"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:autofillHints="" />
+            android:autofillHints=""
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneNumber"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -96,31 +121,35 @@
             android:layout_marginTop="181dp"
             android:layout_marginEnd="49dp"
             android:layout_marginRight="49dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mobile_number"
             android:inputType="phone"
-            android:paddingRight="20dp"
-            android:autofillHints=""
-            android:paddingEnd="20dp" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <TextView
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginStart="144dp"
             android:layout_marginLeft="144dp"
             android:layout_marginTop="50dp"
-            android:layout_marginEnd="158dp"
-            android:layout_marginRight="158dp"
             android:fontFamily="sans-serif-condensed"
             android:foregroundGravity="center"
             android:text="@string/sign_up"
-            android:textSize="36sp" />
+            android:textSize="36sp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
 
         <ProgressBar
             android:id="@+id/signUpProgressBar"
@@ -133,13 +162,13 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="353dp"
-            android:layout_marginRight="353dp"
-            android:visibility="invisible"
-            android:layout_marginBottom="675dp" />
+            android:layout_marginStart="176dp"
+            android:layout_marginLeft="176dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="187dp"
+            android:layout_marginRight="187dp"
+            android:layout_marginBottom="531dp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

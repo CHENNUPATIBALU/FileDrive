@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +14,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailET,passwordET;
+    private TextInputLayout emailET,passwordET;
     private Button signinButton,signupButton;
     private ProgressBar pb;
 
@@ -50,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             if(firebaseAuth.getCurrentUser()!=null)
                 startActivity(new Intent(LoginActivity.this,DriveActivity.class));
         };
+
     }
 
     @Override
@@ -60,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startSignIn()
     {
-        String email = emailET.getText().toString();
-        String password = passwordET.getText().toString();
+        String email = emailET.getEditText().getText().toString();
+        String password = passwordET.getEditText().getText().toString();
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Fields are Empty", Toast.LENGTH_LONG).show();
@@ -77,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     pb.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(),"Sign in Success",Toast.LENGTH_LONG).show();
+                    finish();
                 }
             });
         }

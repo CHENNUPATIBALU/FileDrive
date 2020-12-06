@@ -11,11 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText emailET,passwordET,nameET,phoneET;
+    private TextInputLayout emailET,passwordET,nameET,phoneET;
     private Button signUpButton;
     private FirebaseAuth mAuth;
     private ProgressBar pb;
@@ -41,19 +42,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void startSignUp()
     {
-        String name = nameET.getText().toString();
-        long phone = Long.parseLong(phoneET.getText().toString());
-        String email = emailET.getText().toString();
-        String password = passwordET.getText().toString();
+        String name = nameET.getEditText().getText().toString();
+        long phone = Long.parseLong(phoneET.getEditText().getText().toString());
+        String email = emailET.getEditText().getText().toString();
+        String password = passwordET.getEditText().getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Sign Up failed", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Sign Up Success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, DriveActivity.class));
                     pb.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Login with your credentials", Toast.LENGTH_LONG).show();
+                    finish();
+                    Toast.makeText(getApplicationContext(), "Welcome "+name, Toast.LENGTH_LONG).show();
                 }
             });
     }
