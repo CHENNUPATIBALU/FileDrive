@@ -43,8 +43,8 @@ public class DriveActivity extends AppCompatActivity {
 
     ArrayList<String> al;
     ListView listView;
-    String path,location="";
-    ArrayAdapter<String> arrayAdapter;
+    String path,location="",symbol = "";
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, al);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +60,6 @@ public class DriveActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> shareIntent());
         addFolders();
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, al);
         listView.setAdapter(arrayAdapter);
     }
 
@@ -88,10 +87,15 @@ public class DriveActivity extends AppCompatActivity {
             try {
                 if(adapterView.getItemAtPosition(i)!=null)
                 {
-                    location = path+"/"+arrayAdapter.getItem(i)+"/"+location;
+                    StringBuilder sb = new StringBuilder(path+"/");
+                    String second = arrayAdapter.getItem(i);
+                    sb.append(second);
+                    location = sb.toString();
                     listDir(location);
                     listView.setAdapter(arrayAdapter);
+                    arrayAdapter.notifyDataSetChanged();
                     Toast.makeText(this, location, Toast.LENGTH_SHORT).show();
+                    sb.append("/");
                 }
             } catch (Exception e){
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.chennupatibalu.filedrive;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static android.R.*;
@@ -25,6 +28,11 @@ public class DriveFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    ArrayList<String> al;
+    ListView listView;
+    String path,location="",symbol = "";
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, al);
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,5 +76,45 @@ public class DriveFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_drive, container, false);
 
+    }
+    private void listDir(String path) {
+        File file = new File(path);
+        File[] f = file.listFiles();
+        al.clear();
+        for(File file1:f)
+            al.add(file1.getName());
+    }
+
+    protected void shareIntent()
+    {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "This is an app that fetches your files and folders from your Phone";
+        String shareSub = "FileDrive";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    protected void addFolders()
+    {
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            try {
+                if(adapterView.getItemAtPosition(i)!=null)
+                {
+                    StringBuilder sb = new StringBuilder(path+"/");
+                    String second = arrayAdapter.getItem(i);
+                    sb.append(second);
+                    location = sb.toString();
+                    listDir(location);
+                    listView.setAdapter(arrayAdapter);
+                    arrayAdapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), location, Toast.LENGTH_SHORT).show();
+                    sb.append("/");
+                }
+            } catch (Exception e){
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
