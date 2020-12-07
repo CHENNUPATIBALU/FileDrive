@@ -50,6 +50,13 @@ public class DriveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drive);
 
+        if (savedInstanceState == null)
+        {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view_tag, DriveFragment.class, null)
+                    .commit();
+        }
         listView = findViewById(R.id.listView);
         al = new ArrayList<>();
 
