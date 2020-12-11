@@ -15,8 +15,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
-import static android.R.*;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DriveFragment#newInstance} factory method to

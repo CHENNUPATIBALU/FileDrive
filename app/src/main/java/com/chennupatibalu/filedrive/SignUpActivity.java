@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Sign Up failed", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Sign Up Success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUpActivity.this, DriveActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, DriveFragment.class));
                     pb.setVisibility(View.GONE);
                     finish();
                     Toast.makeText(getApplicationContext(), "Welcome "+name, Toast.LENGTH_LONG).show();
