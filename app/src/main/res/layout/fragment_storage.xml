@@ -12,7 +12,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/storageTextView"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CardView"
             android:layout_width="328dp"
             android:layout_height="116dp"
             android:layout_alignParentStart="true"

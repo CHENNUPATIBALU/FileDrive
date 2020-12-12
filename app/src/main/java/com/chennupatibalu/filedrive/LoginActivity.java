@@ -1,9 +1,14 @@
 package com.chennupatibalu.filedrive;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -76,9 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     pb.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(),"Sign in Success",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
             });
         }
     }
+
 }
