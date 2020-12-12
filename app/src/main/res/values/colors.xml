@@ -10,4 +10,5 @@
     <color name="light_blue">#e6f2ff</color>
     <color name="blue_pink">#b366ff</color>
     <color name="blue_80">#99ccff</color>
+    <color name="progressColor">#1234EF</color>
 </resources>

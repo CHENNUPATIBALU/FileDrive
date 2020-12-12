@@ -10,8 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_file">FileActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Drive</string>
+    <string name="tab_text_2">Storage</string>
     <string name="title_activity_drive">DriveActivity</string>
     <string name="login">login</string>
     <string name="todo">TODO</string>
