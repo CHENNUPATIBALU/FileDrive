@@ -41,7 +41,6 @@
             android:layout_marginTop="237dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:progress="90"
             android:progressTint="@color/progressColor" />
 
     </RelativeLayout>
