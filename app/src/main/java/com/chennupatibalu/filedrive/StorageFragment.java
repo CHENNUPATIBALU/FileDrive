@@ -29,7 +29,7 @@ public class StorageFragment extends Fragment {
         long freeSpace = Environment.getExternalStorageDirectory().getFreeSpace();
 
         TextView tv = view.findViewById(R.id.storageTextView);
-        tv.setText("Total Space: "+totalSpace+"\n"+"Free Space: "+freeSpace);
+        tv.setText(String.format("Total Space: %d\nFree Space: %d", totalSpace, freeSpace));
         pb.setMax((int)totalSpace);
         pb.setProgress((int)(freeSpace));
 

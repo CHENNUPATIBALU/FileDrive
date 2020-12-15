@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@mipmap/login_background"
     tools:context=".LoginActivity">
 
     <RelativeLayout
@@ -20,9 +20,13 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginStart="144dp"
             android:layout_marginLeft="144dp"
             android:layout_marginTop="50dp"
+            android:layout_marginEnd="170dp"
+            android:layout_marginRight="170dp"
             android:fontFamily="sans-serif-condensed"
             android:foregroundGravity="center"
             android:text="@string/common_signin_button_text"
@@ -90,30 +94,38 @@
 
         <Button
             android:id="@+id/signinButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/passwordET"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginStart="87dp"
             android:layout_marginLeft="87dp"
             android:layout_marginTop="75dp"
+            android:layout_marginEnd="235dp"
+            android:layout_marginRight="235dp"
             android:text="@string/common_signin_button_text"
-            android:visibility="visible"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/signUpButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/passwordET"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginStart="226dp"
             android:layout_marginLeft="226dp"
             android:layout_marginTop="74dp"
-            android:text="@string/sign_up"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            android:layout_marginEnd="92dp"
+            android:layout_marginRight="92dp"
+            android:text="@string/sign_up" />
 
         <ProgressBar
             android:id="@+id/signInProgressBar"

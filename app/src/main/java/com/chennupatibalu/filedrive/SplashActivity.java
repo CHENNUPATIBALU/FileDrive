@@ -3,16 +3,14 @@ package com.chennupatibalu.filedrive;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 public class SplashActivity extends AppCompatActivity {
 
     ImageView imageView;
-    private static int splash_screen_time_out = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +18,11 @@ public class SplashActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
 
+        int splash_screen_time_out = 2000;
         new Handler().postDelayed(() -> {
 
             startActivity(new Intent(SplashActivity.this,LoginActivity.class));
             finish();
-        },splash_screen_time_out);
+        }, splash_screen_time_out);
     }
 }

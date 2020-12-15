@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/newFolderMenu" android:title="New Folder"/>
-    <item android:id="@+id/aboutMenu" android:title="About"/>
+    <item android:id="@+id/newFolderMenu" android:title="@string/new_folder" app:showAsAction="never"/>
+    <item android:id="@+id/aboutMenu" android:title="@string/about" app:showAsAction="never"/>
 </menu>

@@ -1,14 +1,9 @@
 package com.chennupatibalu.filedrive;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailET,passwordET;
-    private Button signinButton,signupButton;
     private ProgressBar pb;
 
     private FirebaseAuth mAuth;
@@ -35,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
-        signinButton = findViewById(R.id.signinButton);
-        signupButton = findViewById(R.id.signUpButton);
+        Button signinButton = findViewById(R.id.signinButton);
+        Button signupButton = findViewById(R.id.signUpButton);
         pb = findViewById(R.id.signInProgressBar);
         pb.setVisibility(View.INVISIBLE);
 

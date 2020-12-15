@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,27 +22,22 @@ import com.chennupatibalu.filedrive.ui.main.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
         if(isExternalStorageWritable() && isExternalStorageReadable())
         {
-            SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-            ViewPager viewPager = findViewById(R.id.view_pager);
-            viewPager.setAdapter(sectionsPagerAdapter);
-            TabLayout tabs = findViewById(R.id.tabs);
-            tabs.setupWithViewPager(viewPager);
-
             loadFragment(new DriveFragment());
 
-            tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     if(tab.getText().equals("Drive"))
@@ -92,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.newFolderMenu:
-                newFolder();
+                new DriveFragment().newFolder();
                 Toast.makeText(this, "New Folder Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.aboutMenu:
@@ -119,10 +113,7 @@ public class MainActivity extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
-    protected void newFolder()
-    {
 
-    }
     protected void about()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());

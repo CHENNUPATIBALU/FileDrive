@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
     tools:context=".SplashActivity">
 
     <ProgressBar
@@ -30,8 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496"
-
-        app:srcCompat="@drawable/splash_screen_foldericon" />
+        app:srcCompat="@mipmap/splash_screen_foldericon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
