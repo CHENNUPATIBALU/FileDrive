@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -18,6 +20,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,41 +49,46 @@ public class DriveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view1 = inflater.inflate(R.layout.fragment_drive, container, false);
-        listView = view1.findViewById(R.id.listView);
-        al = new ArrayList<>();
-        path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        View view1 = null;
 
-        listDir(path);
-        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, al);
-        listView.setAdapter(arrayAdapter);
+        if(isExternalStorageReadable() && isExternalStorageWritable())
+        {
+            // Inflate the layout for this fragment
+            view1 = inflater.inflate(R.layout.fragment_drive, container, false);
+            setHasOptionsMenu(true);
+            listView = view1.findViewById(R.id.listView);
+            al = new ArrayList<>();
+            path = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-        sb = new StringBuilder(path+"/");
-        listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            try {
-                if(adapterView.getItemAtPosition(i)!=null)
-                {
-                    second = arrayAdapter.getItem(i);
-                    sb.append(second);
-                    location = sb.toString();
-                    listDir(location);
-                    listView.setAdapter(arrayAdapter);
-                    Toast.makeText(getActivity(), second, Toast.LENGTH_SHORT).show();
-                    sb.append("/");
-                }
-            } catch (Exception e){
-                try
-                {
-                    openFile(new File(sb.substring(0,sb.length()-1)));
-                }
-                catch(Exception exception)
-                {
-                    Toast.makeText(getActivity(), "Error Opening this file", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            listDir(path);
+            arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, al);
+            listView.setAdapter(arrayAdapter);
 
+            sb = new StringBuilder(path+"/");
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                try {
+                    if(adapterView.getItemAtPosition(i)!=null)
+                    {
+                        second = arrayAdapter.getItem(i);
+                        sb.append(second);
+                        location = sb.toString();
+                        listDir(location);
+                        listView.setAdapter(arrayAdapter);
+                        Toast.makeText(getActivity(), second, Toast.LENGTH_SHORT).show();
+                        sb.append("/");
+                    }
+                } catch (Exception e){
+                    try
+                    {
+                        openFile(new File(sb.substring(0,sb.length()-1)));
+                    }
+                    catch(Exception exception)
+                    {
+                        Toast.makeText(getActivity(), "Error Opening this file", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
         return view1;
     }
     private void listDir(String path) {
@@ -143,5 +153,44 @@ public class DriveFragment extends Fragment {
 
     private String getExtension(@NotNull String path) {
         return path.substring(path.lastIndexOf('.')).toLowerCase();
+    }
+
+    public boolean isExternalStorageWritable()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+            {
+                return true;
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "Permission not Granted", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(getActivity(),new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},3);
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public boolean isExternalStorageReadable()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+            {
+                return true;
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "Permission not Granted", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(getActivity(),new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
     }
 }

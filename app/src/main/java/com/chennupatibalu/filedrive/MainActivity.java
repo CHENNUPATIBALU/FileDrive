@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -33,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        if(isExternalStorageWritable() && isExternalStorageReadable())
-        {
-            loadFragment(new DriveFragment());
+
+        loadFragment(new DriveFragment());
 
             tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
             fab.setOnClickListener(view -> shareIntent());
         }
 
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu,menu);
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
             case R.id.newFolderMenu:
@@ -127,44 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setCancelable(false);
         dialog.show();
-    }
-    public boolean isExternalStorageWritable()
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
-            {
-                return true;
-            }
-            else
-            {
-                Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},3);
-                return true;
-            }
-        }
-        else
-        {
-            return true;
-        }
-    }
-    public boolean isExternalStorageReadable()
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
-            {
-                return true;
-            }
-            else
-            {
-                Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
-                return true;
-            }
-        }
-        else
-        {
-            return true;
-        }
     }
 
 }

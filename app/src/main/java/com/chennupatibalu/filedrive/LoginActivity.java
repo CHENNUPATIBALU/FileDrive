@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private Firebase firebaseRef;
+    String name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        String firebaseUrl = "https://file-drive-a4f2f.firebaseio.com/";
+        firebaseRef = new Firebase(firebaseUrl);
+
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
         Button signinButton = findViewById(R.id.signinButton);
@@ -39,8 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             startSignIn();
         });
         signupButton.setOnClickListener(view ->{
-            Intent i = new Intent(LoginActivity.this,SignUpActivity.class);
-            startActivity(i);
+            startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
         });
 
         authStateListener = firebaseAuth -> {
@@ -61,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailET.getEditText().getText().toString();
         String password = passwordET.getEditText().getText().toString();
 
+        SystemClock.sleep(2000);
+
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Fields are Empty", Toast.LENGTH_LONG).show();
         }
@@ -79,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
             });
+
         }
     }
-
 }
