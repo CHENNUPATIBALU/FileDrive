@@ -11,4 +11,6 @@
     <color name="blue_pink">#b366ff</color>
     <color name="blue_80">#99ccff</color>
     <color name="progressColor">#1234EF</color>
+    <color name="login_text_color">#CA09EC</color>
+    <color name="forgot_password_bg">#FFDAB9</color>
 </resources>

@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
                 if(!task.isSuccessful())
                 {
+                    pb.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(),"Sign in failed",Toast.LENGTH_LONG).show();
                 }
                 else

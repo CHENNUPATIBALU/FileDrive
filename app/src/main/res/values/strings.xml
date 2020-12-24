@@ -34,4 +34,6 @@
     <string name="new_folder">New Folder</string>
     <string name="about">About</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="send_password">Send Password</string>
+    <string name="already_have_an_account_sign_in">Already have an account? Sign In</string>
 </resources>

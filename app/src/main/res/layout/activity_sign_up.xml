@@ -4,18 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/login_background"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="@drawable/login_background"
     tools:context=".SignUpActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailET"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -30,6 +26,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginEnd="40dp"
             android:autofillHints=""
+            android:textColorHint="@color/cardview_light_background"
             android:ems="10"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -40,9 +37,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.226">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FAF6F6" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,6 +58,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginEnd="40dp"
+            android:textColorHint="@color/cardview_light_background"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/prompt_password"
@@ -76,29 +75,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="0dp"
                 android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp" />
+                android:layout_marginBottom="0dp"
+                android:textColor="#FDFAFA" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/signupButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="25dp"
-            android:text="@string/sign_up"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.525"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpProgressBar"
-            app:layout_constraintVertical_bias="0.063" />
+    <Button
+        android:id="@+id/signupButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpProgressBar"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -113,6 +114,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="240dp"
+            android:textColorHint="@color/cardview_light_background"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/name"
@@ -124,9 +126,10 @@
             app:layout_constraintTop_toBottomOf="@+id/passwordET"
             app:layout_constraintVertical_bias="0.169">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FBFAFA" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,6 +148,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
+            android:textColorHint="@color/cardview_light_background"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/mobile_number"
@@ -158,7 +162,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#FAF7F7" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -176,6 +181,7 @@
             android:fontFamily="sans-serif-condensed"
             android:foregroundGravity="center"
             android:text="@string/sign_up"
+            android:textColor="@color/cardview_light_background"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -210,5 +216,20 @@
             app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
             app:layout_constraintVertical_bias="0.0" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/alreadyHaveAccountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/already_have_an_account_sign_in"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupButton"
+        app:layout_constraintVertical_bias="0.175" />
 </androidx.constraintlayout.widget.ConstraintLayout>
