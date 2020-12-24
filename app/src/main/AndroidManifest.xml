@@ -3,7 +3,7 @@
     package="com.chennupatibalu.filedrive">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".FileDrive"
@@ -13,9 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FileDrive">
+
+        <activity android:name=".ForgotPasswordActivity"
+            android:label="Forgot Password"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="File Manager"
             android:theme="@style/Theme.FileDrive.NoActionBar" />
         <activity
             android:name=".SignUpActivity"

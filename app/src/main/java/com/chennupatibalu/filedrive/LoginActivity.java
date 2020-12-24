@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -22,11 +23,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailET,passwordET;
     private ProgressBar pb;
+    private TextView forgotPasswordTv;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private Firebase firebaseRef;
-    String name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        String firebaseUrl = "https://file-drive-a4f2f.firebaseio.com/";
-        firebaseRef = new Firebase(firebaseUrl);
 
+        forgotPasswordTv = findViewById(R.id.forgotPasswordTextView);
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
         Button signinButton = findViewById(R.id.signinButton);
@@ -56,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
             if(firebaseAuth.getCurrentUser()!=null)
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
         };
+        forgotPasswordTv.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+        });
 
     }
 
@@ -65,12 +67,10 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(authStateListener);
     }
 
-    public void startSignIn()
+    private void startSignIn()
     {
         String email = emailET.getEditText().getText().toString();
         String password = passwordET.getEditText().getText().toString();
-
-        SystemClock.sleep(2000);
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Fields are Empty", Toast.LENGTH_LONG).show();
@@ -92,5 +92,10 @@ public class LoginActivity extends AppCompatActivity {
             });
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
