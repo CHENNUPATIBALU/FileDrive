@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class FileDrive extends Application {
+public class FileDriveAuthentication extends Application {
 
     @Override
     public void onCreate() {

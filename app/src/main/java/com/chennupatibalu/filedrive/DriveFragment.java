@@ -1,5 +1,7 @@
 package com.chennupatibalu.filedrive;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -22,8 +24,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,45 +56,41 @@ public class DriveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view1 = null;
-        if(isExternalStorageReadable() && isExternalStorageWritable())
-        {
-            // Inflate the layout for this fragment
-            view1 = inflater.inflate(R.layout.fragment_drive, container, false);
-            setHasOptionsMenu(true);
-            listView = view1.findViewById(R.id.listView);
-            al = new ArrayList<>();
-            path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        View view1 = inflater.inflate(R.layout.fragment_drive, container, false);
+        listView = view1.findViewById(R.id.listView);
+        al = new ArrayList<>();
 
-            listDir(path);
-            arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, al);
-            listView.setAdapter(arrayAdapter);
+        //Requesting Permissions
+        writeStoragePermission();   // Edit/Modify
+        readStoragePermission();    // Read
 
-            sb = new StringBuilder(path+"/");
-            listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                try {
-                    if(adapterView.getItemAtPosition(i)!=null)
-                    {
-                        second = arrayAdapter.getItem(i);
-                        sb.append(second);
-                        location = sb.toString();
-                        listDir(location);
-                        listView.setAdapter(arrayAdapter);
-                        Toast.makeText(getActivity(), second, Toast.LENGTH_SHORT).show();
-                        sb.append("/");
-                    }
-                } catch (Exception e){
-                    try
-                    {
-                        openFile(new File(sb.substring(0,sb.length()-1)));
-                    }
-                    catch(Exception exception)
-                    {
-                        Toast.makeText(getActivity(), "Error Opening this file", Toast.LENGTH_SHORT).show();
-                    }
+        path = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+        listDir(path);
+        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, al);
+        listView.setAdapter(arrayAdapter);
+
+        sb = new StringBuilder(path+"/");
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            try {
+                if(adapterView.getItemAtPosition(i)!=null)
+                {
+                    second = arrayAdapter.getItem(i);
+                    sb.append(second);
+                    location = sb.toString();
+                    listDir(location);
+                    listView.setAdapter(arrayAdapter);
+                    Toast.makeText(getActivity(), second, Toast.LENGTH_SHORT).show();
+                    sb.append("/");
                 }
-            });
-        }
+            } catch (Exception e){
+                openFile(new File(sb.toString()));
+            }
+        });
+        FloatingActionButton fab = view1.findViewById(R.id.fab);
+
+        fab.setOnClickListener(view -> shareIntent());
+
         return view1;
     }
     private void listDir(String path) {
@@ -131,66 +133,99 @@ public class DriveFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
     }
+
+    protected void shareIntent()
+    {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "This is an app that fetches your files and folders from your Phone";
+        String shareSub = "FileDrive";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
     private void openFile(File file)
     {
-        String extension = getExtension(file.getAbsolutePath());
-        if(file.exists())
-        {
-            try
-            {
-                Intent fileIntent = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.fromFile(file);
-                fileIntent.setDataAndType(uri,"application/"+extension);
-                fileIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(fileIntent);
+        try {
+
+            Uri uri = FileProvider.getUriForFile(getActivity().getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider",file);;
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            if (file.toString().contains(".doc") || file.toString().contains(".docx")) {
+                // Word document
+                intent.setDataAndType(uri, "application/msword");
+            } else if (file.toString().contains(".pdf")) {
+                // PDF file
+                intent.setDataAndType(uri, "application/pdf");
+            } else if (file.toString().contains(".ppt") || file.toString().contains(".pptx")) {
+                // Powerpoint file
+                intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
+            } else if (file.toString().contains(".xls") || file.toString().contains(".xlsx")) {
+                // Excel file
+                intent.setDataAndType(uri, "application/vnd.ms-excel");
+            } else if (file.toString().contains(".zip")) {
+                // ZIP file
+                intent.setDataAndType(uri, "application/zip");
+            } else if (file.toString().contains(".rar")){
+                // RAR file
+                intent.setDataAndType(uri, "application/x-rar-compressed");
+            } else if (file.toString().contains(".rtf")) {
+                // RTF file
+                intent.setDataAndType(uri, "application/rtf");
+            } else if (file.toString().contains(".wav") || file.toString().contains(".mp3")) {
+                // WAV audio file
+                intent.setDataAndType(uri, "audio/x-wav");
+            } else if (file.toString().contains(".gif")) {
+                // GIF file
+                intent.setDataAndType(uri, "image/gif");
+            } else if (file.toString().contains(".jpg") || file.toString().contains(".jpeg") || file.toString().contains(".png")) {
+                // JPG file
+                intent.setDataAndType(uri, "image/jpeg");
+            } else if (file.toString().contains(".txt")) {
+                // Text file
+                intent.setDataAndType(uri, "text/plain");
+            } else if (file.toString().contains(".3gp") || file.toString().contains(".mpg") ||
+                    file.toString().contains(".mpeg") || file.toString().contains(".mpe") || file.toString().contains(".mp4") || file.toString().contains(".avi")) {
+                // Video files
+                intent.setDataAndType(uri, "video/*");
+            } else {
+                intent.setDataAndType(uri, "*/*");
             }
-            catch(ActivityNotFoundException exception)
-            {
-                Toast.makeText(getActivity(), "No Application found to Open this file", Toast.LENGTH_SHORT).show();
-            }
+
+            intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(FLAG_GRANT_WRITE_URI_PERMISSION);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity(), "No application found which can open the file", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private String getExtension(@NotNull String path) {
-        return path.substring(path.lastIndexOf('.')).toLowerCase();
-    }
-
-    public boolean isExternalStorageWritable()
+    public void writeStoragePermission()
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
-            {
-                return true;
-            }
+            if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                Toast.makeText(getActivity(),"Storage Write Permission granted",Toast.LENGTH_SHORT).show();
             else
             {
                 Toast.makeText(getActivity(), "Permission not Granted", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(getActivity(),new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},3);
-                return true;
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},3);
             }
         }
         else
-        {
-            return true;
-        }
+            Toast.makeText(getActivity(),"Storage Read Permission granted",Toast.LENGTH_SHORT).show();
     }
-    public boolean isExternalStorageReadable()
+    public void readStoragePermission()
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
-            {
-                return true;
-            }
+            if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                Toast.makeText(getActivity(),"Storage Permission granted",Toast.LENGTH_SHORT).show();
             else
             {
                 Toast.makeText(getActivity(), "Permission not Granted", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(getActivity(),new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
-                return true;
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
             }
         }
         else
-        {
-            return true;
-        }
+            Toast.makeText(getActivity(),"Storage Permission granted",Toast.LENGTH_SHORT).show();
     }
 }

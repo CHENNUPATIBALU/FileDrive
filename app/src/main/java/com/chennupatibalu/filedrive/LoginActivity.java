@@ -1,10 +1,10 @@
 package com.chennupatibalu.filedrive;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -46,9 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         signinButton.setOnClickListener(view -> {
             pb.setVisibility(View.VISIBLE);
             startSignIn();
+            finish();
         });
         signupButton.setOnClickListener(view ->{
             startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+            finish();
         });
 
         authStateListener = firebaseAuth -> {
@@ -57,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         };
         forgotPasswordTv.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+            finish();
         });
 
     }
@@ -81,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(!task.isSuccessful())
                 {
                     pb.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),"Sign in failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Sign in failed. Check your internet connection",Toast.LENGTH_LONG).show();
                 }
                 else
                 {

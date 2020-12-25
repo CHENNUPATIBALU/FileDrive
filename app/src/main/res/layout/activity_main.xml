@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.FileDrive.AppBarOverlay">
-
+        
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -48,18 +48,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="590dp"
-        android:layout_marginLeft="340dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        app:srcCompat="@android:drawable/ic_menu_share"
-        app:rippleColor="@color/cardview_light_background"
-        android:contentDescription="@string/share"
-        android:layout_marginStart="340dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

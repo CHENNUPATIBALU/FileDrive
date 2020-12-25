@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -67,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            FloatingActionButton fab = findViewById(R.id.fab);
-
-            fab.setOnClickListener(view -> shareIntent());
         }
 
     @Override
@@ -100,16 +97,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.mainActivityConstraintLayout,fragment);
         fragmentTransaction.commit();
-    }
-    protected void shareIntent()
-    {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        String shareBody = "This is an app that fetches your files and folders from your Phone";
-        String shareSub = "FileDrive";
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
     protected void about()
