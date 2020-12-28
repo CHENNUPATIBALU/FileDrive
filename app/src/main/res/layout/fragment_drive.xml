@@ -21,19 +21,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="310dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginBottom="15dp"
         android:contentDescription="@string/share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="530dp"
-        android:layout_marginStart="340dp"
-        android:layout_marginLeft="340dp"
-        app:rippleColor="@color/cardview_light_background"
-        app:srcCompat="@android:drawable/ic_menu_share" />
+        app:rippleColor="@color/cardview_light_background">
+
+
+
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
 </FrameLayout>
