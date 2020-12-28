@@ -37,7 +37,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.133">
-
         </com.google.android.material.textview.MaterialTextView>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +132,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.663" />
+            app:layout_constraintVertical_bias="0.663"
+            tools:targetApi="lollipop" />
 
         <Button
             android:id="@+id/signUpButton"

@@ -39,7 +39,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -59,9 +62,11 @@ public class DriveFragment extends Fragment {
     String second;
     ArrayAdapter<String> arrayAdapter;
     StringBuilder sb;
+    ExtendedFloatingActionButton fab;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
     @Override
@@ -98,7 +103,7 @@ public class DriveFragment extends Fragment {
                 openFile(new File(sb.toString()));
             }
         });
-        FloatingActionButton fab = view1.findViewById(R.id.fab);
+        fab = view1.findViewById(R.id.fab);
 
         fab.setOnClickListener(view -> shareIntent());
 
@@ -238,5 +243,9 @@ public class DriveFragment extends Fragment {
         }
         else
             Toast.makeText(getActivity(),"Storage Permission granted",Toast.LENGTH_SHORT).show();
+    }
+    public void back()
+    {
+        
     }
 }

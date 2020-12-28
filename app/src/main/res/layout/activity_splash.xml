@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="180dp"
-        android:layout_height="155dp"
+        android:layout_width="245dp"
+        android:layout_height="208dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496"
-        app:srcCompat="@mipmap/splash_screen_foldericon" />
+        app:srcCompat="@drawable/splash_screen_foldericon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
